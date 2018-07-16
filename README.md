@@ -28,7 +28,7 @@ cat haploidized_fasta_scaffold*.fa > haploidized_fasta_all.fa
 
 
 2) 
-D-statistics.  
+D-statistics. Admixture Detection. 
 First decide whether to use the all sites version (suitable for most data) or the transversion only version (suitable for ancient DNA).
 
 Then for each combination you want to test run:
@@ -56,4 +56,30 @@ python weighted_block_jackknfie_D.py P1_P2_P3_OG.dstat 5000000
   To determine whether your result is significant divide the result from the D-stat_parser by the weighted_block_jackknife_D result to get the Z-score.  Z-scores > 3 are generally considered significant.
   
 
+2) 
+fhat. Quantifying Introgression  
+First decide whether to use the all sites version (suitable for most data) or the transversion only version (suitable for ancient DNA).
 
+Then for each combination you want to test run:
+Dstat P1_all.fa P2_all.fa P3_all.fa P4_all.fa OG_all.fa 5000000 > P1_P2_P3_P4_OG.fhat
+   P1 is the individual in the species hypothesized to be recieving introgression with the least, ideally 0, detectable introgression (eg African human see Green et al. 2010)
+   P2 is the individual whose introgressed ancestry is being measured. (eg Non-African Human, see Green et al. 2010)
+   P3 and P4 are members of the candidate introgressing species ideally P3 should be as evolutionarily distant from P4 as P4 is from the actual introgressing individual (eg. Neanderthals, see Green et al. 2010)
+   OG is the outgroup, this should be distant enough to not have incomplete lineage sorting or admixture with P1,P2 or P3.  (eg. Chimp, see Green et al. 2010)
+   5000000 is the output block size, this is used to calculate weighted block jackknife significance later. 5Mb is the recommended block size for most species however, if the reference genome N50 is < 5Mb and admixture is ancient smaller values can be used without negative impacts. If you are testing for very recent admixture you may wish to increase the block size above 5Mb to ensure it is larger than the longest non-recombined block.
+   
+To quantify the fhat values use the parser program:
+python fhat_parser.py P1_P2_P3_P4_OG.fhat
+  This emits:
+  P1_P2_P3_P4_OG.fhat %Admixed
+  If %Admixed > 0 this is the estimated introgressed fraction. 
+  If %Admixed < 0 you set up the test incorrectly, P1 must be less admixed than P2.  Unlike the D-statistic which is agnostic to P1 and P2 selection fhat does care.  f(A,B,P3,P4,O) != -1 * f(B,A,P3,P4,O)
+  
+
+Testing for statistical significance:
+Use the weighted_block_jackknife_fhat.py program to measure the standard error.
+python weighted_block_jackknfie_fhat.py P1_P2_P3_P4_OG.fhat 5000000
+  Give the program the dstat file and the block size.  It will then calculated the standard error.
+  It will the output filename and standard error.
+  
+  To determine whether your result is significant divide the result from the fhat_parser by the weighted_block_jackknife_fhat result to get the Z-score.  Z-scores > 3 are generally considered significant.

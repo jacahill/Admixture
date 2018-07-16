@@ -61,7 +61,7 @@ python weighted_block_jackknfie_D.py P1_P2_P3_OG.dstat 5000000
   To determine whether your result is significant divide the result from the D-stat_parser by the weighted_block_jackknife_D result to get the Z-score.  Z-scores > 3 are generally considered significant.
   
 
-2) 
+3) 
 fhat. Quantifying Introgression  
 First decide whether to use the all sites version (suitable for most data) or the transversion only version (suitable for ancient DNA).
 

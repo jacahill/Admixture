@@ -5,8 +5,13 @@ Special thanks to Rauf Salamzade for translation to C++.
 These scripts have minimal dependencies and are written in either C++ (file suffix .cpp) or python (file suffix .py).
 
 Basic Workflow:
+
 0)
 Compile the C++ code.
+   g++ -o Fhat Fhat.cpp
+   g++ -o Fhat_TV Fhat_TV.cpp
+   g++ -o Dstat Dstat.cpp
+   g++ -o Dstat_TV Dstat_TV.cpp
 
 1) 
 Generate Input data from bam files. 

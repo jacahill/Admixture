@@ -1,6 +1,7 @@
 # Admixture
 Here we provide an example workflow for our admixutre scripts.
 Code is provided as is and without warenty. 
+Special thanks to Rauf Salamzade for translation to C++.
 These scripts have minimal dependencies and are written in either C++ (file suffix .cpp) or python (file suffix .py).
 
 Basic Workflow:

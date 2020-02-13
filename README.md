@@ -80,7 +80,7 @@ First decide whether to use the all sites version (suitable for most data) or th
 
 Then for each combination you want to test run:
 
-Dstat P1_all.fa P2_all.fa P3_all.fa P4_all.fa OG_all.fa 5000000 > P1_P2_P3_P4_OG.fhat
+fhat P1_all.fa P2_all.fa P3_all.fa P4_all.fa OG_all.fa 5000000 > P1_P2_P3_P4_OG.fhat
 
    P1 is the individual in the species hypothesized to be recieving introgression with the least, ideally 0, detectable introgression (eg African human see Green et al. 2010)
 
